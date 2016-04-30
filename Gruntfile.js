@@ -1,6 +1,11 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            dist: {
+                src: ['dist/']
+            }
+        },
         concat: {
             options: {
                 separator: ';'
@@ -44,6 +49,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'less']);
+    grunt.registerTask('default', ['clean', 'concat', 'uglify', 'less']);
 };

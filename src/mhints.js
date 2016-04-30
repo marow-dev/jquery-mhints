@@ -50,8 +50,9 @@
             $(element).removeData('hint-id');
         }
 
-        function display(element) {
-            var hint = $('<div id="hint-' + countId + '" class="hint">' + getMessage(element) + '</div>');
+        function display(element, message) {
+            message = message || getMessage(element);
+            var hint = $('<div id="hint-' + countId + '" class="hint">' + message + '</div>');
             if (options.width) {
                 hint.css('width', parseInt(options.width, 10));
             }
@@ -79,8 +80,9 @@
                     display(this);
                 }
             });
-            $(this).on('show_hint', function () {
-                display(this);
+            $(this).on('show_hint', function (event, message) {
+                var message = message || '';
+                display(this, message);
             });
         });
     };

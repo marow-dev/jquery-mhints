@@ -11,6 +11,8 @@
 				$('h4').mhint({width: 200, close_time: 5, position: 'top', onmouse_display: false});
                 $('p#hintPTop').mhint({width: 200, position: 'top'});
                 $('p#hintPBottom').mhint({width: 200, position: 'bottom'});
+                $('p#hintMessageOnEvent').mhint({width: 150, close_time: 3, position: 'top', onmouse_display: false});
+
 				$('#btnShowHintH4').click(function () {
 					$('h4').trigger('show_hint');
 				});
@@ -19,6 +21,9 @@
                 });
                 $('#btnShowHintPBottom').click(function () {
                     $('p#hintPBottom').trigger('show_hint');
+                });
+                $('#btnMessageOnEvent').click(function () {
+                    $('p#hintMessageOnEvent').trigger('show_hint', 'Message sent via event');
                 });
 			});
 		</script>
@@ -29,9 +34,10 @@
 		<h4 data-hint-message="This is sample hint for H4 title. This is sample hint for H4 title.">Sample H4 Title</h4>
         <p id="hintPTop" data-hint-message="This is sample top hint for P.">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat, nulla ultrices tincidunt semper, augue arcu congue diam, ac aliquet ex lacus vitae velit. Fusce sit amet interdum nulla, ut ullamcorper quam. Integer ornare vestibulum ullamcorper. Donec non suscipit arcu. Quisque a commodo metus. Nunc et ipsum eros. Fusce facilisis laoreet arcu id cursus. Nullam lobortis vehicula diam, a viverra mi interdum nec. Sed laoreet libero nec leo rhoncus, ac mollis ante tristique. Phasellus id facilisis erat.</p>
         <p id="hintPBottom" data-hint-message="This is sample bottom hint for P.">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi id sollicitudin tortor, sit amet auctor tortor. Aenean lacinia purus et nibh bibendum dictum. Donec imperdiet hendrerit commodo. Maecenas auctor diam eget erat auctor auctor. Nullam vel gravida quam, eget interdum lacus. Ut ultricies laoreet ligula non viverra. Cras lorem ante, feugiat iaculis euismod ut, facilisis vel lacus. Cras eu arcu laoreet, vehicula enim vel, faucibus diam. Duis sed lorem molestie, vulputate nisi sed, mollis ante. Pellentesque non faucibus ligula, dictum dignissim nulla. Morbi sollicitudin porttitor libero porta mattis. Suspendisse potenti. Morbi porttitor iaculis mi eget aliquet.</p>
-        <p id="hintPCustom" data-hint-message="This is hint for P (custom position).">Aenean mattis fringilla venenatis. Duis gravida vel dui pellentesque lobortis. Vestibulum porttitor at nunc quis pulvinar. Nulla convallis venenatis varius. Pellentesque blandit ante et accumsan accumsan. Fusce posuere nunc sed pulvinar maximus. Nunc non ligula turpis. Nullam vitae consequat tortor. </p>
+        <p id="hintMessageOnEvent">In mollis, ex eget tincidunt tempus, odio augue vestibulum lacus, sit amet efficitur nisl quam non dui. Vivamus et rutrum justo. Donec molestie, ex a feugiat luctus, odio nunc molestie tellus, non lobortis leo orci sed nunc. Praesent at ex id massa molestie ultricies. Donec cursus aliquet magna, non maximus elit mattis vitae. Nam volutpat ante nisi, eu dignissim mauris molestie eget. Pellentesque luctus diam in rutrum ultrices. Sed at eros vel velit placerat placerat sollicitudin sed nunc. Integer luctus nunc et sagittis vulputate. Maecenas finibus vehicula velit eget pretium. Morbi sed dolor ut ipsum lacinia consequat et sit amet enim. Aliquam varius dignissim porta. Integer pellentesque sed enim tincidunt accumsan.</p>
 		<button id="btnShowHintH4">Show hint on H4</button>
         <button id="btnShowHintPTop">Show hint on P (top)</button>
         <button id="btnShowHintPBottom">Show hint on P (bottom)</button>
+        <button id="btnMessageOnEvent">Show hint (message sent with event)</button>
 	</body>
 </html>
