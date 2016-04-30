@@ -8,9 +8,9 @@
         <link rel="stylesheet" href="../src/styles/mhints.css">
 		<script>
 			$(document).ready(function () {
-				$('h4').mhint({width: 200, close_time: 200, position: 'top', onmouse_display: false});
-                $('p#hintPTop').mhint({width: 200, close_time: 50, position: 'top'});
-                $('p#hintPBottom').mhint({width: 200, close_time: 50, position: 'bottom'});
+				$('h4').mhint({width: 200, close_time: 5, position: 'top', onmouse_display: false});
+                $('p#hintPTop').mhint({width: 200, position: 'top'});
+                $('p#hintPBottom').mhint({width: 200, position: 'bottom'});
 				$('#btnShowHintH4').click(function () {
 					$('h4').trigger('show_hint');
 				});
