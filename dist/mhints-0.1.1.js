@@ -2,7 +2,7 @@
     'use strict';
     var countId = 1;
     $.fn.mhint = function (options) {
-        $.extend({onmouse_display: true}, options);
+        options = $.extend({onmouse_display: true}, options);
 
         function getMessage(hint) {
             var message = '';
@@ -40,35 +40,43 @@
             return styles;
         }
 
+        function hide(element) {
+            var id = $(element).data('hint-id');
+            $('div#hint-' + id).remove();
+            $(element).removeData('hint-id');
+        }
+
+        function display(element) {
+            var hint = $('<div id="hint-' + countId + '" class="hint">' + getMessage(element) + '</div>');
+            if (options.width) {
+                hint.css('width', parseInt(options.width, 10));
+            }
+            $('body').append(hint);
+            $(element).data('hint-id', countId);
+            $.each(calcPosition(element, hint), function (k, v) {
+                hint.css(k, v);
+            });
+            if (options.close_time && options.onmouse_display === false) {
+                (function (countId) {
+                    setTimeout(function () { hide(element) }, parseInt(options.close_time, 10) * 1000);
+                }(countId));
+            }
+            countId = countId + 1;
+        }
+
         return this.each(function () {
             $(this).on('mouseleave', function () {
-                var id = $(this).data('hint-id');
-                if (options.onmouse_display && id) {
-                    $('div#hint-' + id).remove();
-                    $(this).removeData('hint-id');
+                if (options.onmouse_display && $(this).data('hint-id')) {
+                    hide(this);
                 }
             });
             $(this).on('mouseenter', function () {
                 if (options.onmouse_display && !$(this).data('hint-id')) {
-                    $('body').append('<div id="hint-' + countId + '" class="hint" style="' + buildStyles(getStyles(this)) + '">' + getMessage(this) + '</div>');
-                    $(this).data('hint-id', countId);
-                    countId = countId + 1;
+                    display(this);
                 }
             });
             $(this).on('show_hint', function () {
-                var hint = $('<div id="hint-' + countId + '" class="hint">' + getMessage(this) + '</div>');
-                if (options.width) {
-                    hint.css('width', parseInt(options.width, 10));
-                }
-                $('body').append(hint);
-                $(this).data('hint-id', countId);
-                $.each(calcPosition(this, hint), function (k, v) {
-                    hint.css(k, v);
-                });
-                (function (countId) {
-                    setTimeout(function () { $('div#hint-' + countId).remove(); }, parseInt(options.close_time, 10) * 1000);
-                }(countId));
-                countId = countId + 1;
+                display(this);
             });
         });
     };
