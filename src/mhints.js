@@ -8,8 +8,12 @@
             var message = '';
             if (options.message) {
                 message = options.message;
-            } else if ($(hint).data('hint-message')) {
-                message = $(hint).data('hint-message');
+            } else {
+                if (options.message_attribute) {
+                    message = $(hint).attr(options.message_attribute);
+                } else if ($(hint).data('hint-message')) {
+                    message = $(hint).data('hint-message');
+                }
             }
             return message;
         }
