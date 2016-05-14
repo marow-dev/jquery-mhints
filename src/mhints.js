@@ -50,23 +50,32 @@
             $(element).removeData('hint-id');
         }
 
-        function display(element, message) {
+        function display(element, message, callback) {
+            callback = callback || null;
             message = message || getMessage(element);
             var hint = $('<div id="hint-' + countId + '" class="hint">' + message + '</div>');
             if (options.width) {
                 hint.css('width', parseInt(options.width, 10));
             }
             $('body').append(hint);
-            $(element).data('hint-id', countId);
-            $.each(calcPosition(element, hint), function (k, v) {
-                hint.css(k, v);
-            });
-            if (options.close_time && options.onmouse_display === false) {
-                (function (countId) {
-                    setTimeout(function () { hide(element) }, parseInt(options.close_time, 10) * 1000);
-                }(countId));
+            if (parseInt($(element).data('hint-id'), 10) > 0) {
+                return false;
+            } else {
+                $(element).data('hint-id', countId);
+                $.each(calcPosition(element, hint), function (k, v) {
+                    hint.css(k, v);
+                });
+                if (options.close_time && options.onmouse_display === false) {
+                    (function (countId) {
+                        setTimeout(function () { hide(element); }, parseInt(options.close_time, 10));
+                    }(countId));
+                }
+                countId = countId + 1;
+                if (typeof callback === 'function') {
+                    callback();
+                }
+                return true;
             }
-            countId = countId + 1;
         }
 
         return this.each(function () {
@@ -80,9 +89,17 @@
                     display(this);
                 }
             });
-            $(this).on('show_hint', function (event, message) {
-                var message = message || '';
-                display(this, message);
+            $(this).on('show_hint', function (event, params) {
+                var message = '';
+                var callback = null;
+                if (typeof params === 'string') {
+                    message = params;
+                    callback = null;
+                } else if (typeof params === 'object') {
+                    message = params.message || '';
+                    callback = params.callback || null;
+                }
+                display(this, message, callback);
             });
         });
     };
