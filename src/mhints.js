@@ -57,10 +57,10 @@
             if (options.width) {
                 hint.css('width', parseInt(options.width, 10));
             }
-            $('body').append(hint);
             if (parseInt($(element).data('hint-id'), 10) > 0) {
                 return false;
             } else {
+                $('body').append(hint);
                 $(element).data('hint-id', countId);
                 $.each(calcPosition(element, hint), function (k, v) {
                     hint.css(k, v);

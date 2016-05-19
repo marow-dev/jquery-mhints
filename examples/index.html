@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="../src/styles/mhints.css">
 		<script>
 			$(document).ready(function () {
-				$('h4').mhint({width: 200, close_time: 5, position: 'top', onmouse_display: false});
+				$('h4').mhint({width: 200, close_time: 500, position: 'top', onmouse_display: false});
                 $('p#hintPTop').mhint({width: 200, position: 'top'});
                 $('p#hintPBottom').mhint({width: 200, position: 'bottom'});
-                $('p#hintMessageOnEvent').mhint({width: 150, close_time: 3, position: 'top', onmouse_display: false});
+                $('p#hintMessageOnEvent').mhint({width: 150, close_time: 1000, position: 'top', onmouse_display: false});
 
 				$('#btnShowHintH4').click(function () {
 					$('h4').trigger('show_hint');
